@@ -19,6 +19,15 @@ const char snake = '*';
 const char fruit = 'X';
 const char quit = 'q';
 
+/*typedef struct _SMALL_RECT {
+  SHORT Left;
+  SHORT Top;
+  SHORT Right;
+  SHORT Bottom;
+} SMALL_RECT;
+
+*/
+
 
 int xfruit;
 int yfruit;
@@ -40,6 +49,15 @@ eDirection dir;
 
 // function to initialise the game
 void setup(){
+    // Set console size
+    _SMALL_RECT rect;
+    rect.Top = 0;
+    rect.Left = 0;
+    rect.Bottom = height + 10;
+    rect.Right = width + 10;
+    HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleWindowInfo(handle, 1, &rect);
+
     game_over = false;
     cout << game_over << endl;
     score = 0;
