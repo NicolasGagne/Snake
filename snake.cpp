@@ -39,6 +39,12 @@ bool game_over;
 enum eDirection {STOP = 0, LEFT, RIGHT, UP, DOWN};
 eDirection dir;
 
+
+void set_fruit(){
+    xfruit = rand() %width;
+    yfruit = rand() %height;
+}
+
 // function to initialise the game
 void setup(){
     // Set console size
@@ -54,10 +60,8 @@ void setup(){
     score = 0;
     x = width / 2;
     y = height / 2;
-    xfruit = rand() %width;
-    yfruit = rand() %height;
     dir = STOP;
-
+    set_fruit();
 
     for(int i = 0; i < snake_lenght; i++){
         x_array[i] = snake_lenght + 1;
@@ -197,14 +201,18 @@ int logic(){
         y_array[i] = y_array[i + 1];
     }
 
-    if (x <= 0 || x >= width || y <= 0 || y >= height ){
+    if (x < 0 || x >= width || y < 0 || y >= height ){
         cout << "outside board" << endl;
 
         game_over = true;
     }
     else if(x == xfruit && y == yfruit){
         cout << "fruit found" << endl;
-        game_over = true;
+        score = score + 100;
+        do {
+            set_fruit();
+        }while(array_index(xfruit, yfruit));
+
     }
     else if((array_index(x, y)) && dir !=STOP){
         cout << "Hit Snake" << endl;
