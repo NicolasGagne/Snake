@@ -19,15 +19,7 @@ const char snake = '*';
 const char fruit = 'X';
 const char quit = 'q';
 
-/*typedef struct _SMALL_RECT {
-  SHORT Left;
-  SHORT Top;
-  SHORT Right;
-  SHORT Bottom;
-} SMALL_RECT;
-
-*/
-
+_SMALL_RECT rect;
 
 int xfruit;
 int yfruit;
@@ -50,7 +42,6 @@ eDirection dir;
 // function to initialise the game
 void setup(){
     // Set console size
-    _SMALL_RECT rect;
     rect.Top = 0;
     rect.Left = 0;
     rect.Bottom = height + 10;
@@ -78,9 +69,7 @@ void setup(){
 bool array_index(int line, int row){
     // function to return if part of snake body
     for(int i = 0; i < snake_lenght; i++){
-        //cout << " " << x_array[i] << "-" << y_array[i];
         if ( x_array[i] == line && y_array[i] == row){
-            //cout << "iftest";
             return true;
         }
     }
@@ -99,7 +88,7 @@ void print_array(){
 
 // function to draw the board
 void draw(){
-    //system("cls"); // clear the screen
+    // Reset cursur Top left.
     SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), {0,0} );
 
     // top wall
@@ -109,11 +98,11 @@ void draw(){
     cout << endl;
 
     for (int r = 0; r < height; r++){
-        cout << wall; // vertical wall
+        // left vertical wall
+        cout << wall;
 
         // line
         for(int l = 0; l < width; l++){
-            //cout << "array_index:" << array_index();
             // check what to draw
             if (r == y && l == x){
                 // snake head
@@ -123,15 +112,14 @@ void draw(){
                 cout << fruit;
             }
             else if(array_index(l, r) && dir != STOP){
-                // snake body
-                //cout << "elseif";
                 cout << snake;
             }
             else{
                 cout << space;
             }
         }
-        cout << wall << endl; // vertical wall
+        // Right vertical wall
+        cout << wall << endl;
     }
 
     // bottom wall
@@ -142,7 +130,6 @@ void draw(){
     cout << "Score: " << score << endl;
     cout << "Use " << quit << " for Quit." << endl;
     cout << "X:" << x << " Y:"<< y << endl;
-    //cout << "Xfruit:" << xfruit << " Yfruit:"<< yfruit << endl;
     cout << endl;
 }
 
