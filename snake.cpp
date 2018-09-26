@@ -6,7 +6,7 @@
 #include <array>
 using namespace std;
 
-
+// test visual studio
 const int height = 30;
 const int width = 50;
 const int snake_lenght = 100;
